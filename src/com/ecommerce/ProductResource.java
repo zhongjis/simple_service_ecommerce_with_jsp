@@ -16,17 +16,6 @@ import com.ecommerce.service.ProductService;
 
 @Path("/products")
 public class ProductResource {
-	
-    @GET
-    @Path("/hello")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String sayHello(){
-    	
-
-        return "Hello!";
-
-    }
-    
 	@Path("{id}")
 	@GET
     @Produces( { MediaType.APPLICATION_JSON }) //This provides only JSON responses
@@ -35,7 +24,7 @@ public class ProductResource {
 		if(p == null) {
             return Response.status(Response.Status.NOT_FOUND).build();        
 		}
-        return Response.ok(p).build();
+        return Response.ok().entity(p.getDetail_description() + " *** Please use the back button and refresh to go to the latest product page ***").build();
 	}
 	
 	@POST
@@ -45,11 +34,9 @@ public class ProductResource {
         p.setName(name);
 
         System.out.println(p);
-        
-//        <a href=\"INF124_PA4/product.jsp\">Go Back to the Product Page</a>
-        
+
         if(ProductService.addProductToCart(p)) {
-            return Response.ok().entity("Product Added Successfully, please go back to home manuelly").build();
+            return Response.ok().entity("Product Added Successfully. *** Please use the back button and refresh to go to the latest product page ***").build();
         }
 
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
