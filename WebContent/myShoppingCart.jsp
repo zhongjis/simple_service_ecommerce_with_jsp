@@ -21,15 +21,13 @@
 <head>
     <meta charset="UTF-8">
     <title>My Shopping Cart</title>
-    <jsp:include page="header.jsp"/>
     <link rel="stylesheet" href="styles/product.css">
     <link rel="stylesheet" href="styles/general.css">
 </head>
 
 <body>
-    <a href="myShoppingCart.jsp">My Shopping Cart</a>
 
-    <h1>My Shopping Cart</h1>
+    <h1>[My Shopping Cart]</h1>
     
     	<%
 			Statement stmt = connection.createStatement();  

@@ -27,10 +27,9 @@
 </head>
 
 <body>
-	<a href="myShoppingCart.jsp">My Shopping Cart</a>
 	<div id="products">
+		<jsp:include page="myShoppingCart.jsp"/>
 		<h1>Our Products</h1>
-		<!-- dynamic product listing code here -->
 		<%
 			Statement stmt = connection.createStatement();  
 			ResultSet rs = stmt.executeQuery("SELECT * FROM products");  
