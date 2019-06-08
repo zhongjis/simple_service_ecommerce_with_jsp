@@ -42,7 +42,7 @@
 				out.println("</a>");
 				out.println("<h3 class=\"product-title\">" + rs.getString(3) + "</h3>");
 				out.println("<p class=\"product-description\">" + rs.getString(4) + "</p>");
-				
+				out.println("<a href=\"v1/api/products/" + rs.getString(1) + "\">More Detail</a>");
 				// out.println("<a href=\"index.jsp\">Contact Us</a>");
 				out.println("</div>");
 			}
