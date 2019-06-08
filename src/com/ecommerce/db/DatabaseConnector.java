@@ -20,7 +20,7 @@ public class DatabaseConnector {
             e.printStackTrace();
         }
         try {
-            return DriverManager.getConnection("jdbc:mysql://localhost/?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+            return DriverManager.getConnection("jdbc:mysql://localhost:8889/inf124?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
                     "root", "root");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
