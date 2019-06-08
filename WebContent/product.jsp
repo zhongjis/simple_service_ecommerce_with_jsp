@@ -9,8 +9,8 @@
 		String connectionURL = "jdbc:mysql://localhost:8889/inf124?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 		Class.forName("com.mysql.jdbc.Driver").newInstance(); 
 		connection = DriverManager.getConnection(connectionURL, "root", "root");
-		if(!connection.isClosed())
-			// out.println("Successfully connected to " + "MySQL server using TCP/IP...");
+		/* if(!connection.isClosed())
+			out.println("Successfully connected to " + "MySQL server using TCP/IP..."); */
 	}catch(Exception ex){
 		out.println("Unable to connect to database"+ex);
 	}
@@ -27,6 +27,7 @@
 </head>
 
 <body>
+	<a href="myShoppingCart.jsp">My Shopping Cart</a>
 	<div id="products">
 		<h1>Our Products</h1>
 		<!-- dynamic product listing code here -->
@@ -42,7 +43,8 @@
 				out.println("</a>");
 				out.println("<h3 class=\"product-title\">" + rs.getString(3) + "</h3>");
 				out.println("<p class=\"product-description\">" + rs.getString(4) + "</p>");
-				out.println("<a href=\"index.jsp\">Contact Us</a>");
+				out.println("<input type=\"submit\" value=\"Add to Cart\">");
+				// out.println("<a href=\"index.jsp\">Contact Us</a>");
 				out.println("</div>");
 			}
 			
@@ -51,4 +53,5 @@
 		%>
 	</div>
 </body>
+
 </html>
