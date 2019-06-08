@@ -29,16 +29,24 @@
 
     <h1>[My Shopping Cart]</h1>
     
-    	<%
-			Statement stmt = connection.createStatement();  
-			ResultSet rs = stmt.executeQuery("SELECT * FROM orders");  
-			
-			while (rs.next()) {
-				continue;
-			}
-			
-			connection.close();
-		%>
+	<%
+		Statement stmt = connection.createStatement();  
+		ResultSet rs = stmt.executeQuery("SELECT * FROM orders");  
+		
+		while (rs.next()) {
+			out.println("<h4 class=\"product-title\">" + rs.getString(2) + "</h3>");
+		}
+		
+		connection.close();
+	%>
+
+    <form action="../INF124_PA4/v1/api/products" method = "POST">
+        The product name that you want to purchase:
+        <input id = "name" name="name" ></input>
+        <br/>
+        <input type="submit" value="Add to Cart">
+    </form>
+
 </body>
 
 </html>
