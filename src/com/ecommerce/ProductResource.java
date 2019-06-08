@@ -6,6 +6,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -44,26 +45,59 @@ public class ProductResource {
 	}
 	
 	@PUT
-	@Path("{id}")
+    @Path("{id}")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-	public Response updateCart(@PathParam("id") int id, Product p) {
-		Product retrievedProduct = ProductService.getProductById(id);
-		
-		if(retrievedProduct == null) {
+    public Response updateCart(@PathParam("id") int id, Product p) {
+        Product retrievedProduct = ProductService.getProductById(id);
+
+        if(retrievedProduct == null) {
             //If not found then respond with a 404 response.
             return Response.status(Response.Status.NOT_FOUND).entity("We could not find the requested resource").build();
         }
-		
-		p.setId(id);
-		if(p.getName() == null) {
+
+        p.setId(id);
+        if(p.getName() == null) {
             p.setName(retrievedProduct.getName());
         }
-		
-		// ADD MORE THINGS ********************
+        if(p.getImg_dir() == null) {
+            p.setImg_dir(retrievedProduct.getImg_dir());
+        }
+        if(p.getBrief_description() == null) {
+            p.setBrief_description(retrievedProduct.getBrief_description());
+        }
+        if(p.getDetail_description() == null) {
+            p.setDetail_description(retrievedProduct.getDetail_description());
+        }
+
+        if(ProductService.updateCart(p)) {
+            return Response.ok().entity(p).build();
+        }
+        // ADD MORE THINGS **
+        return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+    }
+	
+	@DELETE
+    @Path("{id}")
+    @Consumes({MediaType.APPLICATION_FORM_URLENCODED, MediaType.APPLICATION_JSON})
+    public Response deleteTodo(@PathParam("id") int id) {
+
+        //Retrieve the todo_object that you want to delete.
+        Product retrievedProduct = ProductService.getProductById(id);
+ 
+        if(retrievedProduct == null) {
+            //If not found throw a 404
+            return Response.status(Response.Status.NOT_FOUND).
+                    entity("We could not find the requested resource").build();
+        }
+
+        // This calls the JDBC method which in turn calls the DELETE SQL command.
+        if(ProductService.deleteProduct(retrievedProduct)) {
+            return Response.ok().entity("TODO Deleted Successfully").build();
+        }
+
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
 
-		
-	}
-	
+
+    }
 }

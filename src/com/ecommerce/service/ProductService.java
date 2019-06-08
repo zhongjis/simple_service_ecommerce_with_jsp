@@ -48,8 +48,34 @@ public class ProductService {
 	}
 	
 	public static boolean updateCart(Product p) {
-		System.out.println("update cart  " );
+        String sql = "UPDATE orders SET img_dir=?, name=?, brief_description=?, detail_description=? WHERE id=?;";
+        Connection connection = DatabaseConnector.getConnection();
 
-		return true;
-	}
+        boolean updateStatus = DatabaseUtils.performDBUpdate(connection, sql, p.getImg_dir(), p.getName(), p.getBrief_description(), p.getDetail_description(), String.valueOf(p.getId()));
+
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return updateStatus;
+    }
+	
+	public static boolean deleteProduct(Product retrievedProduct) {
+
+        String sql = "DELETE FROM orders WHERE id=?;";
+
+        Connection connection = DatabaseConnector.getConnection();
+
+        boolean updateStatus = DatabaseUtils.performDBUpdate(connection, sql, String.valueOf(retrievedProduct.getId()));
+
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return updateStatus;
+    }
 }
