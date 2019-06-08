@@ -42,7 +42,14 @@
 				out.println("</a>");
 				out.println("<h3 class=\"product-title\">" + rs.getString(3) + "</h3>");
 				out.println("<p class=\"product-description\">" + rs.getString(4) + "</p>");
+				out.println("<form action=\"../INF124_PA4-0.0.1-SNAPSHOT/v1/api/products\" method=\"POST\">");
+				out.println("Amount:");
+				out.println("<input name=\"Amount\" ></input>");
+				out.println("<br/>");
 				out.println("<input type=\"submit\" value=\"Add to Cart\">");
+				out.println("</form>");
+				
+				
 				// out.println("<a href=\"index.jsp\">Contact Us</a>");
 				out.println("</div>");
 			}
